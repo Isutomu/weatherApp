@@ -1,0 +1,57 @@
+:root {
+    font-size: 32px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    padding: 15px;
+    background-image: url("/src/img/backYellowWeather.png");
+    background-position: center;
+
+    text-align: center;
+
+    display: grid;
+    grid-template-rows: 200px 1fr;
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+#site-logo {
+    width: 850px;
+    height: 200px;
+    background-image: url("/src/img/header.png");
+    background-position: center;
+}
+
+main {
+    padding: 15px;
+
+    align-self: start;
+    
+    display: grid;
+    grid-template-rows: 50px 30px 100px;
+    grid-template-columns: 1fr;
+    place-items: center;
+    gap: 10px;
+}
+
+#city-input {
+    width: 450px;
+    height: 40px;
+    text-align: center;
+
+    font-size: 0.8rem;
+    
+    border-radius: 5px;
+}
+
+#search-btn {
+    width: 70px;
+    height: 30px;
+
+    font-size: 0.5rem;
+    font-weight: bold;
+
+    border-radius: 5px;
+}
