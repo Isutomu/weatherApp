@@ -17,6 +17,11 @@ body {
     place-items: center;
 }
 
+img {
+    width: auto;
+    height: 80px;
+}
+
 #site-logo {
     width: 850px;
     height: 200px;
@@ -30,7 +35,7 @@ main {
     align-self: start;
     
     display: grid;
-    grid-template-rows: 50px 30px 100px;
+    grid-template-rows: 50px 30px 1fr;
     grid-template-columns: 1fr;
     place-items: center;
     gap: 10px;
