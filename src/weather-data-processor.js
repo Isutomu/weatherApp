@@ -43,12 +43,24 @@ export function getDailyWeather(weatherData) {
   );
 }
 
-export function getRecentHourlyForecast(weatherData, hours = 6) {
+export function getRecentHourlyForecast(
+  weatherData,
+  hours = 6,
+  daysAdvance = 0,
+) {
   const forecastData = getHourlyForecast(weatherData).flat();
-  const currentHour = new Date().getHours();
+  let currentHour;
+  let hoursToReturn;
+  if (daysAdvance) {
+    currentHour = 23 * daysAdvance + 1;
+    hoursToReturn = 24;
+  } else {
+    currentHour = new Date().getHours() + 1;
+    hoursToReturn = hours;
+  }
 
   const filteredForecast = [];
-  for (let i = currentHour + 1; i <= currentHour + hours; i += 1) {
+  for (let i = currentHour; i < currentHour + hoursToReturn; i += 1) {
     const forecastHourCopy = forecastData[i];
     forecastHourCopy.hour = i % 24;
     filteredForecast.push(forecastHourCopy);
