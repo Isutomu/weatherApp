@@ -1,4 +1,6 @@
 #weather-container {
+    visibility: hidden;
+
     background-color: rgba(37, 37, 222, 0.653);
     border: 2px solid white;
     border-radius: 5px;
