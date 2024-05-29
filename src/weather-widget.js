@@ -4,7 +4,7 @@ export default function createWeatherVisualizer(
   temperatureUnit = 'c',
 ) {
   const weatherWidget = document.createElement('article');
-  weatherWidget.classList.add(elemClass);
+  weatherWidget.classList.add(elemClass, 'weather-widget');
 
   const icon = document.createElement('img');
   icon.src = weatherData.condition.icon;
