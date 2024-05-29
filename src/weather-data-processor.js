@@ -38,7 +38,7 @@ export function getDailyWeather(weatherData) {
       forecast.day,
       'avgtemp_c',
       'avgtemp_f',
-      'avgtemphumidity',
+      'avghumidity',
     ),
   );
 }
