@@ -1,29 +1,50 @@
+function generateForecastInstance(
+  forecastData,
+  identifierCelsius,
+  identifierFahrenheit,
+  identifierHumidity,
+) {
+  return {
+    c: forecastData[identifierCelsius],
+    f: forecastData[identifierFahrenheit],
+    hr: forecastData[identifierHumidity],
+    condition: forecastData.condition,
+  };
+}
+
 function getHourlyForecast(weatherData) {
   const forecastData = weatherData.forecast.forecastday;
-  return forecastData.forEach((day) =>
-    day.hour.forEach((hour) => ({
-      c: hour.temp_c,
-      f: hour.temp_f,
-    })),
+  return forecastData.map((day) =>
+    day.hour.map((hour) =>
+      generateForecastInstance(hour, 'temp_c', 'temp_f', 'humidity'),
+    ),
   );
 }
 
 export function getCurrentWeather(weatherData) {
-  const temperature = {
-    c: weatherData.current.temp_c,
-    f: weatherData.current.temp_f,
-  };
-  const humidity = { humidity: weatherData.current.humidity };
-  const condition = {
-    text: weatherData.current.condition.text,
-    icon: weatherData.current.condition.icon,
-  };
+  return generateForecastInstance(
+    weatherData.current,
+    'temp_c',
+    'temp_f',
+    'humidity',
+  );
+}
 
-  return { temperature, humidity, condition };
+export function getDailyWeather(weatherData) {
+  const forecastData = weatherData.forecast.forecastday;
+
+  return forecastData.map((forecast) =>
+    generateForecastInstance(
+      forecast.day,
+      'avgtemp_c',
+      'avgtemp_f',
+      'avgtemphumidity',
+    ),
+  );
 }
 
 export function getRecentHourlyForecast(weatherData, hours = 6) {
-  const forecastData = [...getHourlyForecast(weatherData)];
+  const forecastData = getHourlyForecast(weatherData).flat();
   const currentHour = new Date().getHours();
 
   const filteredForecast = [];
@@ -34,12 +55,4 @@ export function getRecentHourlyForecast(weatherData, hours = 6) {
   }
 
   return filteredForecast;
-}
-
-export function getDailyWeather(weatherData) {
-  const forecastData = weatherData.forecast.forecastday;
-  return forecastData.forEach((day) => ({
-    c: day.day.avgtemp_c,
-    f: day.day.avgtemp_f,
-  }));
 }
