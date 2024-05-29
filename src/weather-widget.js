@@ -1,10 +1,15 @@
 export default function createWeatherVisualizer(
   weatherData,
   elemClass,
+  timeReference,
   temperatureUnit = 'c',
 ) {
   const weatherWidget = document.createElement('article');
   weatherWidget.classList.add(elemClass, 'weather-widget');
+
+  const title = document.createElement('span');
+  title.textContent = timeReference;
+  weatherWidget.appendChild(title);
 
   const icon = document.createElement('img');
   icon.src = weatherData.condition.icon;
