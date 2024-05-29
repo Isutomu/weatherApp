@@ -1,0 +1,57 @@
+#weather-container {
+    background-color: rgba(37, 37, 222, 0.653);
+    border: 2px solid white;
+    border-radius: 5px;
+
+    display: grid;
+    grid: auto 1fr 1fr / 600px;
+    place-items: center;
+    gap: 5px;
+}
+
+.weather-focused {
+    display: grid;
+    grid: 1fr / 200px 400px;
+}
+
+.focused-daily-weather {
+    width: 200px;
+
+    background-color: rgba(37, 37, 222, 0.1);
+
+    font-size: 0.9rem;
+
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.hourly-weather{
+    width: 400px;
+    padding-right: 15px;
+
+    background-color: rgba(37, 37, 222, 0.1);
+
+    font-size: 0.6rem;
+
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: start;
+}
+
+.daily-weather{
+    width: 600px;
+    padding: 5px;
+
+    background-color: rgba(37, 37, 222, 0.1);
+
+    font-size: 0.7rem;
+
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+}
