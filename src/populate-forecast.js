@@ -4,7 +4,12 @@ import createWeatherVisualizer from './weather-widget.js';
 
 function createFocusedDaily(weatherData) {
   const forecast = dataProcessor.getCurrentWeather(weatherData);
-  return createWeatherVisualizer(forecast, 'focused-daily-weather', 'c');
+  return createWeatherVisualizer(
+    forecast,
+    'focused-daily-weather',
+    'Today',
+    'c',
+  );
 }
 
 function createDaily(weatherData) {
@@ -19,7 +24,12 @@ function createHourly(weatherData, hours) {
     .getRecentHourlyForecast(weatherData, hours)
     .slice(1);
   return forecast.map((dailyWeather) =>
-    createWeatherVisualizer(dailyWeather, 'hourly-weather', 'c'),
+    createWeatherVisualizer(
+      dailyWeather,
+      'hourly-weather',
+      `${String(dailyWeather.hour).padStart(2, '0')}:00`,
+      'c',
+    ),
   );
 }
 
@@ -30,7 +40,7 @@ export default async function populateForecast({ city, days, hours }) {
   container
     .querySelector('.weather-focused')
     .prepend(createFocusedDaily(weatherData));
-  container.append(...createDaily(weatherData));
+  // container.append(...createDaily(weatherData));
   container
     .querySelector('.weather-hourly-container')
     .append(...createHourly(weatherData, hours));
