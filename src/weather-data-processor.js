@@ -1,3 +1,13 @@
+function getHourlyForecast(weatherData) {
+  const forecastData = weatherData.forecast.forecastday;
+  return forecastData.forEach((day) =>
+    day.hour.forEach((hour) => ({
+      c: hour.temp_c,
+      f: hour.temp_f,
+    })),
+  );
+}
+
 export function getCurrentWeather(weatherData) {
   const temperature = {
     c: weatherData.current.temp_c,
@@ -13,7 +23,17 @@ export function getCurrentWeather(weatherData) {
 }
 
 export function getRecentHourlyForecast(weatherData, hours = 6) {
-  const forecastData = getHourlyForecast(weatherData);
+  const forecastData = [...getHourlyForecast(weatherData)];
+  const currentHour = new Date().getHours();
+
+  const filteredForecast = [];
+  for (let i = currentHour + 1; i <= currentHour + hours; i += 1) {
+    const forecastHourCopy = forecastData[i];
+    forecastHourCopy.hour = i % 24;
+    filteredForecast.push(forecastHourCopy);
+  }
+
+  return filteredForecast;
 }
 
 export function getDailyWeather(weatherData) {
@@ -22,14 +42,4 @@ export function getDailyWeather(weatherData) {
     c: day.day.avgtemp_c,
     f: day.day.avgtemp_f,
   }));
-}
-
-function getHourlyForecast(weatherData) {
-  const forecastData = weatherData.forecast.forecastday;
-  return forecastData.forEach((day) =>
-    day.hour.forEach((hour) => ({
-      c: hour.temp_c,
-      f: hour.temp_f,
-    })),
-  );
 }
