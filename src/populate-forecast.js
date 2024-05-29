@@ -34,14 +34,18 @@ function createHourly(weatherData, hours) {
 }
 
 export default async function populateForecast({ city, days, hours }) {
-  const container = document.querySelector('#weather-container');
   const weatherData = await requestWeatherData(city, days);
 
-  container
-    .querySelector('.weather-focused')
-    .prepend(createFocusedDaily(weatherData));
+  const focusedContainer = document.createElement('div');
+  focusedContainer.classList.add('weather-focused');
+  focusedContainer.appendChild(createFocusedDaily(weatherData));
+
   // container.append(...createDaily(weatherData));
-  container
-    .querySelector('.weather-hourly-container')
-    .append(...createHourly(weatherData, hours));
+
+  const hourContainer = document.createElement('div');
+  hourContainer.classList.add('weather-hourly-container');
+  hourContainer.append(...createHourly(weatherData, hours));
+  focusedContainer.appendChild(hourContainer);
+
+  document.querySelector('#weather-container').appendChild(focusedContainer);
 }
