@@ -47,6 +47,17 @@ img {
     height: 80px;
 }
 
+.loading {
+    font-size: 2rem;
+    visibility: hidden;
+    position: absolute;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 #site-logo {
     width: 850px;
     height: 200px;
